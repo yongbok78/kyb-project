@@ -25,15 +25,21 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>KYB 프로젝트</span>
-      <div>
-        <button mat-button (click)="setMenuTitle($event.target)">
-          Angular 예제
-        </button>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlexFill>
+        <div fxFlex="12" fxLayoutAlign="start center" fxFlexFill>
+          <span>KYB 프로젝트</span>
+        </div>
+        <div fxFlex="68" fxLayoutAlign="start end" fxFlexFill>
+          <button mat-button (click)="setMenuTitle($event)">
+            Angular 예제
+          </button>
+        </div>
+        <div fxFlex="20" fxLayoutAlign="end center" fxFlexFill>
+          <mat-slide-toggle (change)="changeDark($event)">{{
+            store.isDark ? "어두움" : "밝음"
+          }}</mat-slide-toggle>
+        </div>
       </div>
-      <mat-slide-toggle (change)="changeDark($event)">{{
-        store.isDark ? "어두움" : "밝음"
-      }}</mat-slide-toggle>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

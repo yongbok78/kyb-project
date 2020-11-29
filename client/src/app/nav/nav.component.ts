@@ -25,8 +25,9 @@ export class NavComponent {
     public store: StoreService
   ) {}
 
-  setMenuTitle(el: HTMLElement) {
-    this.menuTitle = el.innerText;
+  setMenuTitle(ev: MouseEvent) {
+    this.menuTitle =
+      (ev.target as HTMLElement | undefined)!.innerText || this.menuTitle;
   }
 
   changeDark(e: MatSlideToggleChange) {
