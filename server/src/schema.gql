@@ -1,0 +1,90 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Mutation {
+  createPost(PostCreateInput: PostCreateInput!): Post!
+  createUser(UserCreateInput: UserCreateInput!): User!
+  removePost(id: Int!): Post!
+  removeUser(id: Int!): User!
+  updatePost(PostUpdateInput: PostUpdateInput!): Post!
+  updateUser(UserUpdateInput: UserUpdateInput!): User!
+}
+
+type Post {
+  """인증 사용자"""
+  author: User!
+
+  """내용"""
+  content: String
+
+  """아이디"""
+  id: Int!
+
+  """발행여부"""
+  published: Boolean!
+
+  """제목"""
+  title: String!
+}
+
+input PostCreateInput {
+  """내용"""
+  content: String
+
+  """발행여부"""
+  published: Boolean!
+
+  """제목"""
+  title: String!
+}
+
+input PostUpdateInput {
+  """내용"""
+  content: String
+  id: Int!
+
+  """발행여부"""
+  published: Boolean
+
+  """제목"""
+  title: String
+}
+
+type Query {
+  post(id: Int!): Post!
+  posts(PostWhereInput: PostCreateInput!): [Post!]!
+  user(id: Int!): User!
+  users(UserWhereInput: UserCreateInput!): [User!]!
+}
+
+type User {
+  """이메일"""
+  email: String!
+
+  """아이디"""
+  id: Int!
+
+  """이름"""
+  name: String
+
+  """배포자"""
+  posts: [Post!]
+}
+
+input UserCreateInput {
+  """아이디"""
+  email: String!
+
+  """이름"""
+  name: String
+}
+
+input UserUpdateInput {
+  """아이디"""
+  email: String
+  id: Int!
+
+  """이름"""
+  name: String
+}
