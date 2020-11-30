@@ -4,7 +4,7 @@
 - Angular
     - Angular Material
     - Angular FlexLayout
-    - Relay
+    - Relay *사용예정*
 ## 2. server에 사용한 기술
 ------------
 - NestJS
