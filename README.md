@@ -1,8 +1,9 @@
-풀스텍 연습 프로젝트
+#풀스텍 연습 프로젝트
 ===================
-client
-------
-#Angular
+##client
+--------
+###Angular
+----------
 ##Angular Material
 ##Angular FlexLayout
 ##Relay
