@@ -7,11 +7,9 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-toolbar>{{ menuTitle }}</mat-toolbar>
+    <mat-toolbar>{{ menu.title }}</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a *ngFor="let m of menu.children" mat-list-item routerLink="{{m.path}}">{{m.title}}</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -30,8 +28,8 @@
           <span>KYB 프로젝트</span>
         </div>
         <div fxFlex="68" fxLayoutAlign="start end" fxFlexFill>
-          <button mat-button (click)="setMenuTitle($event)">
-            Angular 예제
+          <button mat-button  routerLink="{{menu.path}}">
+            {{menu.title}}
           </button>
         </div>
         <div fxFlex="20" fxLayoutAlign="end center" fxFlexFill>

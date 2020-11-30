@@ -12,9 +12,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
+import { ExamplesModule } from './pages/examples.module';
+import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent],
+  declarations: [AppComponent, NavComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,6 +30,7 @@ import { NavComponent } from './nav/nav.component';
     MatListModule,
     MatButtonModule,
     MatSlideToggleModule,
+    ExamplesModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

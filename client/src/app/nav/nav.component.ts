@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import { StoreService } from '../common/store.service';
+import { Component } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { NavigationEnd, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { filter, map, shareReplay } from 'rxjs/operators';
+import { Menu, MENUS } from '../common/menu.model';
+import { StoreService } from '../common/store.service';
 
 @Component({
   selector: 'app-nav',
@@ -11,7 +13,7 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
   styleUrls: ['./nav.component.css'],
 })
 export class NavComponent {
-  menuTitle = 'Angular 화면 예제';
+  menu: Menu;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -22,12 +24,25 @@ export class NavComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
+    private router: Router,
     public store: StoreService
-  ) {}
+  ) {
+    this.menu = MENUS[0];
+    this.router.events
+      .pipe(
+        filter((ev) => ev instanceof NavigationEnd),
+        map((ev) => ev as NavigationEnd)
+      )
+      .subscribe(this.selectMenu);
+  }
 
-  setMenuTitle(ev: MouseEvent) {
-    this.menuTitle =
-      (ev.target as HTMLElement | undefined)!.innerText || this.menuTitle;
+  selectMenu(ne: NavigationEnd) {
+    let path = ne.urlAfterRedirects;
+    if (path === '' || path === '/') return;
+
+    let subfixPath = '/' + path.split('/')[1],
+      tmp = MENUS.filter((m) => m.path === subfixPath)[0];
+    if (this.menu !== tmp) this.menu = tmp || MENUS[0];
   }
 
   changeDark(e: MatSlideToggleChange) {
