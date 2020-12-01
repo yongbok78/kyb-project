@@ -16,4 +16,12 @@ export const MENUS: Menu[] = [
       { title: 'Drag & Drop', path: '/examples/drag-drop' },
     ],
   },
+  {
+    title: 'Apollo Angular 예제',
+    path: '/apollo',
+    children: [
+      { title: '사용자', path: '/apollo/user' },
+      { title: '게시물', path: '/apollo/post' },
+    ],
+  },
 ];

@@ -6,7 +6,14 @@ const routes: Routes = [
   {
     path: 'examples',
     loadChildren: () =>
-      import('./pages/examples.module').then((m) => m.ExamplesModule),
+      import('./pages/examples/examples.module').then((m) => m.ExamplesModule),
+  },
+  {
+    path: 'apollo',
+    loadChildren: () =>
+      import('./pages/apollo-exam/apollo-exam.module').then(
+        (m) => m.ApolloExamModule
+      ),
   },
   { path: '', redirectTo: '/examples', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddressComponent } from './examples/address/address.component';
-import { DashboardComponent } from './examples/dashboard/dashboard.component';
-import { DragDropComponent } from './examples/drag-drop/drag-drop.component';
-import { TableComponent } from './examples/table/table.component';
-import { TreeComponent } from './examples/tree/tree.component';
+import { AddressComponent } from './address/address.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DragDropComponent } from './drag-drop/drag-drop.component';
+import { TableComponent } from './table/table.component';
+import { TreeComponent } from './tree/tree.component';
 
 const routes: Routes = [
   {
