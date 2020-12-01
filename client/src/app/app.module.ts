@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { ExamplesModule } from './pages/examples.module';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, NavComponent, PageNotFoundComponent],
@@ -31,6 +33,8 @@ import { PageNotFoundComponent } from './common/page-not-found/page-not-found.co
     MatButtonModule,
     MatSlideToggleModule,
     ExamplesModule,
+    GraphQLModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

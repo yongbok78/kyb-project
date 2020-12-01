@@ -3,7 +3,7 @@
 - Angular
     - Angular Material
     - Angular FlexLayout
-    - Relay *사용예정*
+    - Apollo Angular
 --------------------------------------------------------
 ## 2. server에 사용한 기술
 - NestJS
