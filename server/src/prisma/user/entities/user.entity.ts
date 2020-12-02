@@ -9,6 +9,6 @@ export class User {
   name?: string;
   @Field({ description: '이메일' })
   email: string;
-  @Field(() => [Post], { nullable: true, description: '배포자' })
+  @Field(() => [Post], { nullable: 'itemsAndList', description: '배포자' })
   posts?: Post[];
 }

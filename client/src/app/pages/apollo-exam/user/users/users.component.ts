@@ -1,7 +1,8 @@
 import { DataSource } from '@angular/cdk/table';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { User } from 'src/app/common/models';
 
 const USER_DATA: User[] = [
@@ -37,15 +38,16 @@ const USER_DATA: User[] = [
 })
 export class UsersComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['id', 'name', 'email', 'posts'];
-  dataSource = USER_DATA;
+  dataSource: User[] = [];
+  subscription?: Subscription;
   constructor(private apollo: Apollo) {}
 
   ngOnInit(): void {
-    this.apollo
+    this.subscription = this.apollo
       .watchQuery({
         query: gql`
-          {
-            user(id: 1) {
+          query test {
+            users {
               id
               email
               name
@@ -59,12 +61,15 @@ export class UsersComponent implements OnInit, OnDestroy {
           }
         `,
       })
-      .valueChanges.subscribe((result) => {
-        console.log(result.data);
+      .valueChanges.pipe(map((result) => result.data as any))
+      .subscribe((data) => {
+        this.dataSource = data.users;
       });
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.subscription!.unsubscribe();
+  }
 
   add() {
     alert('add');

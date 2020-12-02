@@ -12,6 +12,7 @@ import { ChidrenIncludes } from 'src/common/decorators.decorator';
 import { Post } from '../post/entities/post.entity';
 import { UserCreateInput } from './dto/user-create.input';
 import { UserUpdateInput } from './dto/user-update.input';
+import { UserWhereInput } from './dto/user-where.input';
 import { User } from './entities/user.entity';
 import { UserService } from './user.service';
 
@@ -26,8 +27,8 @@ export class UserResolver {
 
   @Query(() => [User])
   users(
-    @Args('UserWhereInput') where: UserCreateInput,
-    @ChidrenIncludes(['posts']) include
+    @ChidrenIncludes(['posts']) include,
+    @Args('UserWhereInput', { nullable: true }) where?: UserWhereInput
   ) {
     return this.userService.findMany({ where, include });
   }
@@ -52,7 +53,6 @@ export class UserResolver {
 
   @ResolveField(() => [Post])
   posts(@Parent() user: User): Post[] | null {
-    console.log(user);
     return user.posts;
   }
 }

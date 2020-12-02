@@ -1,0 +1,8 @@
+projects:
+  server:
+    schema: http://localhost:3000/graphql/
+    documents: ../server/src/schema.gql
+    extensions:
+      endpoints:
+        default:
+          url: http://localhost:3000/graphql/

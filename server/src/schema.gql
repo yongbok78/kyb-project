@@ -55,7 +55,7 @@ type Query {
   post(id: Int!): Post!
   posts(PostWhereInput: PostCreateInput!): [Post!]!
   user(id: Int!): User!
-  users(UserWhereInput: UserCreateInput!): [User!]!
+  users(UserWhereInput: UserWhereInput): [User!]!
 }
 
 type User {
@@ -69,11 +69,11 @@ type User {
   name: String
 
   """배포자"""
-  posts: [Post!]
+  posts: [Post]
 }
 
 input UserCreateInput {
-  """아이디"""
+  """이메일"""
   email: String!
 
   """이름"""
@@ -81,9 +81,17 @@ input UserCreateInput {
 }
 
 input UserUpdateInput {
-  """아이디"""
+  """이메일"""
   email: String
   id: Int!
+
+  """이름"""
+  name: String
+}
+
+input UserWhereInput {
+  """이메일"""
+  email: String
 
   """이름"""
   name: String
