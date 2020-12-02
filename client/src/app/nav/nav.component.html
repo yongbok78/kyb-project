@@ -7,10 +7,10 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-toolbar>{{ title | async }}</mat-toolbar>
+    <mat-toolbar>{{ store.menu.title }}</mat-toolbar>
     <mat-nav-list>
       <a
-        *ngFor="let m of children | async"
+        *ngFor="let m of store.menu.children"
         mat-list-item
         routerLink="{{ m.path }}"
         >{{ m.title }}</a
@@ -33,7 +33,7 @@
           <span>KYB 프로젝트</span>
         </div>
         <div fxFlex="68" fxLayoutAlign="start end" fxFlexFill>
-          <button *ngFor="let m of menus" mat-button routerLink="{{ m.path }}">
+          <button *ngFor="let m of store.menus" mat-button routerLink="{{ m.path }}">
             {{ m.title }}
           </button>
         </div>

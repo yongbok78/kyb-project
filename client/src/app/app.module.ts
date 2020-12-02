@@ -13,16 +13,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
+import { GraphQLModule } from './graphql.module';
 import { NavComponent } from './nav/nav.component';
-import { MenuComponent } from './nav/menu.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    PageNotFoundComponent,
-    MenuComponent,
-  ],
+  declarations: [AppComponent, NavComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -37,8 +32,10 @@ import { MenuComponent } from './nav/menu.component';
     MatButtonModule,
     MatSlideToggleModule,
     HttpClientModule,
+    GraphQLModule,
   ],
   providers: [],
+  exports: [FlexLayoutModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
