@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "lint:eslint": "tsc --noEmit && eslint . --ext js,ts,json --quiet --fix",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "gql": "graphql get-schema --project prod"
   },
   "private": true,
   "dependencies": {
@@ -34,6 +35,7 @@
     "@angular-devkit/build-angular": "~0.1100.2",
     "@angular/cli": "~11.0.2",
     "@angular/compiler-cli": "~11.0.1",
+    "@playlyfe/gql": "^2.6.2",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
