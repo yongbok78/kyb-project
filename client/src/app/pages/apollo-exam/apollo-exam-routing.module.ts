@@ -17,6 +17,7 @@ const routes: Routes = [
         children: [
           { path: '', pathMatch: 'full', redirectTo: 'list' },
           { path: 'list', component: UsersComponent },
+          { path: 'save', component: UserUpsertComponent },
           { path: 'save/:id', component: UserUpsertComponent },
           { path: ':id', component: UserComponent },
         ],

@@ -1,1 +1,58 @@
-<p>user-upsert works!</p>
+<div [formGroup]="user">
+  <mat-card class="mat-elevation-z6">
+    <mat-card-header>
+      <mat-card-title>사용자 등록</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayout="row" fxFlexAlign="start start" fxLayoutGap="10px">
+        <mat-form-field appearance="legacy">
+          <mat-label>이름</mat-label>
+          <input matInput placeholder="홍길동" formControlName="name" />
+        </mat-form-field>
+        <mat-form-field appearance="legacy">
+          <mat-label>이메일</mat-label>
+          <input matInput placeholder="abc@abc.com" formControlName="email" />
+          <mat-error>이메일을 정확히 입력하세요.</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="accent" (click)="addPost()">
+          게시물 추가
+        </button>
+      </div>
+      <div
+        *ngIf="posts.length > 0"
+        fxLayout="column"
+        fxFlexAlign="start start"
+        fxLayoutGap="10px"
+      >
+        <h1>게시물</h1>
+        <div
+          *ngFor="let post of posts.controls; let i = index"
+          [formGroup]="getPost(i)"
+          fxLayout="row"
+          fxFlexAlign="start start"
+          fxLayoutGap="10px"
+        >
+          <mat-form-field appearance="legacy">
+            <mat-label>제목</mat-label>
+            <input matInput placeholder="제목" formControlName="title" />
+            <mat-error>제목을 입력해주세요.</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="legacy">
+            <mat-label>내용</mat-label>
+            <input matInput placeholder="내용" formControlName="content" />
+          </mat-form-field>
+          <mat-checkbox color="primary" formControlName="published"
+            >발행여부</mat-checkbox
+          >
+          <button mat-mini-fab color="warn" (click)="deletePost(i)">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="goList()">목록</button>
+      <button mat-raised-button color="primary" (click)="save()">저장</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
