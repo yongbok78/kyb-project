@@ -1,36 +1,7 @@
-import { DataSource } from '@angular/cdk/table';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { User } from 'src/app/common/models';
+import { Subscription } from 'rxjs';
+import { ListUserGQL, User } from '../user.gql';
 
-const USER_DATA: User[] = [
-  {
-    id: 1,
-    email: 'test@test.com',
-    name: 'test',
-    posts: [{ id: 1, title: 'post', content: 'post content' }],
-  },
-  {
-    id: 2,
-    email: 'test@test.com',
-    name: 'test',
-    posts: [{ id: 2, title: 'post', content: 'post content' }],
-  },
-  {
-    id: 3,
-    email: 'test@test.com',
-    name: 'test',
-    posts: [{ id: 3, title: 'post', content: 'post content' }],
-  },
-  {
-    id: 4,
-    email: 'test@test.com',
-    name: 'test',
-    posts: [{ id: 4, title: 'post', content: 'post content' }],
-  },
-];
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -40,31 +11,14 @@ export class UsersComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['id', 'name', 'email', 'posts'];
   dataSource: User[] = [];
   subscription?: Subscription;
-  constructor(private apollo: Apollo) {}
+  constructor(private list: ListUserGQL) {}
 
   ngOnInit(): void {
-    this.subscription = this.apollo
-      .watchQuery({
-        query: gql`
-          query UserList {
-            users {
-              id
-              email
-              name
-              posts {
-                id
-                title
-                content
-                published
-              }
-            }
-          }
-        `,
-      })
-      .valueChanges.pipe(map((result) => result.data as any))
-      .subscribe((data) => {
-        this.dataSource = data.users;
-      });
+    this.subscription = this.list
+      .watch()
+      .valueChanges.subscribe(
+        (result) => (this.dataSource = result.data.users || [])
+      );
   }
 
   ngOnDestroy(): void {
