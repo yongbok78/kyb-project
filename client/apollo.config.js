@@ -1,8 +1,10 @@
 module.exports = {
   client: {
     service: {
-      name: "client",
-      url: "http://localhost:3000/graphql"
-    }
-  }
+      tagName:'graphql',
+      name: 'server',
+      localSchemaFile : '../server/src/schema.gql'
+      // url: "http://localhost:3000/graphql"
+    },
+  },
 };

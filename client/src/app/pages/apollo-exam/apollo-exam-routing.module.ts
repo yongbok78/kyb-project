@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PostUpsertComponent } from '../post/post-upsert/post-upsert.component';
-import { PostComponent } from '../post/post/post.component';
-import { PostsComponent } from '../post/posts/posts.component';
+import { PostUpsertComponent } from './post/post-upsert/post-upsert.component';
+import { PostComponent } from './post/post/post.component';
+import { PostsComponent } from './post/posts/posts.component';
 import { UserUpsertComponent } from './user/user-upsert/user-upsert.component';
 import { UserComponent } from './user/user/user.component';
 import { UsersComponent } from './user/users/users.component';
