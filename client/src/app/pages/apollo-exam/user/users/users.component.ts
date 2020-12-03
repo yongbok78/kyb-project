@@ -46,7 +46,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.subscription = this.apollo
       .watchQuery({
         query: gql`
-          query test {
+          query UserList {
             users {
               id
               email
