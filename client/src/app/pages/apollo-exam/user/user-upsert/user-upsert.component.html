@@ -18,20 +18,10 @@
           게시물 추가
         </button>
       </div>
-      <div
-        *ngIf="posts.length > 0"
-        fxLayout="column"
-        fxFlexAlign="start start"
-        fxLayoutGap="10px"
-      >
+      <div *ngIf="posts.length > 0" fxLayout="column" fxFlexAlign="start start" fxLayoutGap="10px">
         <h1>게시물</h1>
-        <div
-          *ngFor="let post of posts.controls; let i = index"
-          [formGroup]="getPost(i)"
-          fxLayout="row"
-          fxFlexAlign="start start"
-          fxLayoutGap="10px"
-        >
+        <div *ngFor="let post of posts.controls; let i = index" [formGroup]="getPost(i)" fxLayout="row"
+          fxFlexAlign="start start" fxLayoutGap="10px">
           <mat-form-field appearance="legacy">
             <mat-label>제목</mat-label>
             <input matInput placeholder="제목" formControlName="title" />
@@ -41,9 +31,7 @@
             <mat-label>내용</mat-label>
             <input matInput placeholder="내용" formControlName="content" />
           </mat-form-field>
-          <mat-checkbox color="primary" formControlName="published"
-            >발행여부</mat-checkbox
-          >
+          <mat-checkbox color="primary" formControlName="published">발행여부</mat-checkbox>
           <button mat-mini-fab color="warn" (click)="deletePost(i)">
             <mat-icon>remove</mat-icon>
           </button>
@@ -52,7 +40,7 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" (click)="goList()">목록</button>
-      <button mat-raised-button color="primary" (click)="save()">저장</button>
+      <button mat-raised-button color="primary" (click)="save()" [disabled]="user.invalid">저장</button>
     </mat-card-actions>
   </mat-card>
 </div>

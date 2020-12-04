@@ -33,7 +33,7 @@ input PostCreateInput {
   content: String
 
   """발행여부"""
-  published: Boolean!
+  published: Boolean
 
   """제목"""
   title: String!
@@ -78,6 +78,9 @@ input UserCreateInput {
 
   """이름"""
   name: String
+
+  """배포자"""
+  posts: [PostCreateInput]
 }
 
 input UserUpdateInput {
@@ -87,6 +90,9 @@ input UserUpdateInput {
 
   """이름"""
   name: String
+
+  """배포자"""
+  posts: [PostCreateInput!]
 }
 
 input UserWhereInput {

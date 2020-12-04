@@ -26,6 +26,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           (result) => (this.dataSource = result.data.users || [])
         )
     );
+    console.log(this.route.snapshot.paramMap.get('no'));
   }
 
   ngOnDestroy(): void {

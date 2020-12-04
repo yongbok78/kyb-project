@@ -1,8 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { CreateUserGQL, UpdateUserGQL } from '../user.gql';
 
 @Component({
   selector: 'app-user-upsert',
@@ -17,9 +24,9 @@ export class UserUpsertComponent implements OnInit, OnDestroy {
   };
 
   user = this.fb.group({
-    name: [''],
-    email: ['', Validators.compose([Validators.required, Validators.email])],
-    posts: this.fb.array([]),
+    name: [null],
+    email: [null, Validators.compose([Validators.required, Validators.email])],
+    posts: this.fb.array([this.fb.group(this.emptyPost)]),
   });
 
   get posts() {
@@ -31,7 +38,7 @@ export class UserUpsertComponent implements OnInit, OnDestroy {
   }
 
   getPost(i: number): FormGroup {
-    return this.posts.get([i]) as FormGroup;
+    return this.posts.at(i) as FormGroup;
   }
 
   deletePost(i: number) {
@@ -43,7 +50,9 @@ export class UserUpsertComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private createUser: CreateUserGQL,
+    private updateUser: UpdateUserGQL
   ) {}
 
   ngOnInit(): void {
@@ -59,10 +68,21 @@ export class UserUpsertComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    if (this.user.valid) {
-      console.log(this.user.value);
-    } else {
-      console.log('저장 불가');
-    }
+    this.createUser
+      .mutate({
+        user: this.user.value,
+      })
+      .subscribe(
+        (result) => {
+          console.log(result);
+          this.router.navigate(['../', result.data?.createUser?.id], {
+            relativeTo: this.route,
+          });
+        },
+        (err) => {
+          console.log(err);
+          alert('사용자 정보 등록 중 문제가 발생하였습니다.');
+        }
+      );
   }
 }

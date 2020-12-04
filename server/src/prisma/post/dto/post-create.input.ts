@@ -6,6 +6,6 @@ export class PostCreateInput {
   title: string;
   @Field({ nullable: true, description: '내용' })
   content?: string;
-  @Field({ description: '발행여부' })
+  @Field({ nullable: true, description: '발행여부' })
   published?: boolean;
 }

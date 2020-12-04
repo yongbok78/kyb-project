@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma.service';
+import { UserCreateInput } from './dto/user-create.input';
 
 const include = { posts: true };
 @Injectable()
@@ -22,8 +23,16 @@ export class UserService {
     return this.prisma.user.findMany(qry);
   }
 
-  create(data: Prisma.UserCreateInput) {
-    return this.prisma.user.create({ data, include });
+  create(input: UserCreateInput) {
+    const { name, email, posts } = input;
+    return this.prisma.user.create({
+      data: {
+        name,
+        email,
+        posts: { create: posts },
+      },
+      include,
+    });
   }
 
   update(args: {
