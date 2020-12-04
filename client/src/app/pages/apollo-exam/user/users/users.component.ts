@@ -26,6 +26,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           (result) => (this.dataSource = result.data.users || [])
         )
     );
+    // TODO: router에서 넘어온 페이징처리 위한 값 확인
     console.log(this.route.snapshot.paramMap.get('no'));
   }
 
