@@ -1,14 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { CreateUserGQL, UpdateUserGQL } from '../user.gql';
 
 @Component({

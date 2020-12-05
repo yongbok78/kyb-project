@@ -21,10 +21,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.push(
       this.list
-        .watch()
-        .valueChanges.subscribe(
-          (result) => (this.dataSource = result.data.users || [])
-        )
+        .fetch()
+        .subscribe((result) => (this.dataSource = result.data.users || []))
     );
     // TODO: router에서 넘어온 페이징처리 위한 값 확인
     console.log(this.route.snapshot.paramMap.get('no'));
@@ -35,9 +33,9 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   add() {
-    this.router.navigate(['../save'], { relativeTo: this.route });
+    this.router.navigate(['../../save'], { relativeTo: this.route });
   }
-  save(user: User) {
-    alert(JSON.stringify(user));
+  detail(id: number) {
+    this.router.navigate(['../../', id], { relativeTo: this.route });
   }
 }

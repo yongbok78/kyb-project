@@ -3,15 +3,17 @@ import { Mutation, Query } from 'apollo-angular';
 import gql from 'graphql-tag';
 
 export interface User {
-  id?: string;
+  id?: number;
   name?: string;
-  email?: number;
-  posts?: {
-    id?: string;
-    title?: string;
-    content?: string;
-    published?: string;
-  };
+  email?: string;
+  posts?: [
+    {
+      id?: number;
+      title?: string;
+      content?: string;
+      published: false;
+    }
+  ];
 }
 export interface UserResponse {
   users?: User[];

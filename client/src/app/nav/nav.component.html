@@ -13,12 +13,13 @@
         *ngFor="let m of store.menu.children"
         mat-list-item
         routerLink="{{ m.path }}"
+        routerLinkActive="active"
         >{{ m.title }}</a
       >
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="mat-elevation-z5">
+    <mat-toolbar class="mat-elevation-z5" color="primary">
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -28,22 +29,35 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <div fxLayout="row" fxLayoutAlign="start center" fxFlexFill>
-        <div fxFlex="12" fxLayoutAlign="start center" fxFlexFill>
-          <span>KYB 프로젝트</span>
-        </div>
-        <div fxFlex="68" fxLayoutAlign="start end" fxFlexFill>
-          <button *ngFor="let m of store.menus" mat-button routerLink="{{ m.path }}">
-            {{ m.title }}
-          </button>
-        </div>
-        <div fxFlex="20" fxLayoutAlign="end center" fxFlexFill>
-          <mat-slide-toggle (change)="changeDark($event)">{{
-            store.isDark ? '어두움' : '밝음'
-          }}</mat-slide-toggle>
-        </div>
-      </div>
+      <span>KYB 프로젝트</span>
+      <span style="flex: 1 1 auto"></span>
+      <mat-slide-toggle (change)="changeDark($event)">{{
+        store.isDark ? '어두움' : '밝음'
+      }}</mat-slide-toggle>
     </mat-toolbar>
-    <router-outlet></router-outlet>
+    <nav mat-tab-nav-bar>
+      <a
+        *ngFor="let m of store.menus"
+        mat-tab-link
+        routerLink="{{ m.path }}"
+        [active]="store.menu.path === m.path"
+      >
+        {{ m.title }}
+      </a>
+    </nav>
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
+      <div
+        fxFlex="80"
+        fxFlex.xs="100"
+        [@routeAnimations]="prepareRoute(outlet)"
+      >
+        <router-outlet #outlet="outlet"></router-outlet>
+      </div>
+    </div>
+    <mat-grid-tile-footer>
+      <mat-toolbar
+        ><span style="flex: 1 1 auto"></span>Created by KYB</mat-toolbar
+      >
+    </mat-grid-tile-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

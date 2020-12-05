@@ -20,21 +20,44 @@ const routes: Routes = [
             path: 'list',
             children: [
               { path: '', pathMatch: 'full', redirectTo: '1' },
-              { path: ':no', component: UsersComponent },
+              {
+                path: ':no',
+                component: UsersComponent,
+                data: { animation: 'Users' },
+              },
             ],
           },
-          { path: 'save', component: UserUpsertComponent },
-          { path: 'save/:id', component: UserUpsertComponent },
-          { path: ':id', component: UserComponent },
+          {
+            path: 'save',
+            component: UserUpsertComponent,
+            data: { animation: 'UserUpsert' },
+          },
+          {
+            path: ':id',
+            component: UserComponent,
+            data: { animation: 'User' },
+          },
         ],
       },
       {
         path: 'post',
         children: [
           { path: '', pathMatch: 'full', redirectTo: 'list' },
-          { path: 'list', component: PostsComponent },
-          { path: 'save/:id', component: PostUpsertComponent },
-          { path: ':id', component: PostComponent },
+          {
+            path: 'list',
+            component: PostsComponent,
+            data: { animation: 'Posts' },
+          },
+          {
+            path: 'save',
+            component: PostUpsertComponent,
+            data: { animation: 'PostUpsert' },
+          },
+          {
+            path: ':id',
+            component: PostComponent,
+            data: { animation: 'Post' },
+          },
         ],
       },
     ],

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'examples', pathMatch: 'full' },
   {
     path: 'examples',
     loadChildren: () =>
@@ -15,7 +16,6 @@ const routes: Routes = [
         (m) => m.ApolloExamModule
       ),
   },
-  { path: '', redirectTo: '/examples', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
 

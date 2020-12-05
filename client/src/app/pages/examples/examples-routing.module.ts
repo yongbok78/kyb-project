@@ -11,11 +11,27 @@ const routes: Routes = [
     path: '',
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'address', component: AddressComponent },
-      { path: 'table', component: TableComponent },
-      { path: 'tree', component: TreeComponent },
-      { path: 'drag-drop', component: DragDropComponent },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        data: { animation: 'Dashboard' },
+      },
+      {
+        path: 'address',
+        component: AddressComponent,
+        data: { animation: 'Address' },
+      },
+      {
+        path: 'table',
+        component: TableComponent,
+        data: { animation: 'Table' },
+      },
+      { path: 'tree', component: TreeComponent, data: { animation: 'Tree' } },
+      {
+        path: 'drag-drop',
+        component: DragDropComponent,
+        data: { animation: 'DragDrop' },
+      },
     ],
   },
 ];

@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { GraphQLModule } from 'src/app/graphql.module';
 import { ApolloExamRoutingModule } from './apollo-exam-routing.module';
 import { PostUpsertComponent } from './post/post-upsert/post-upsert.component';
@@ -41,6 +42,7 @@ import { UsersComponent } from './user/users/users.component';
     MatCardModule,
     MatInputModule,
     MatCheckboxModule,
+    MatExpansionModule,
     ReactiveFormsModule,
   ],
 })
