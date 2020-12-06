@@ -6,20 +6,21 @@ export interface User {
   id?: number;
   name?: string;
   email?: string;
-  posts?: [
-    {
-      id?: number;
-      title?: string;
-      content?: string;
-      published: false;
-    }
-  ];
+  posts?: Post[];
 }
 export interface UserResponse {
   users?: User[];
   user?: User;
   createUser?: User;
   updateUser?: User;
+}
+
+export interface Post {
+  id?: number;
+  title?: string;
+  content?: string;
+  published: false;
+  delete?: false;
 }
 
 @Injectable({

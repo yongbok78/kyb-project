@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { ListUserGQL, User } from '../user.gql';
 
 @Component({
@@ -21,7 +22,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.push(
       this.list
-        .fetch()
+        .watch(undefined, { fetchPolicy: 'no-cache' })
+        .valueChanges.pipe(tap(console.log))
         .subscribe((result) => (this.dataSource = result.data.users || []))
     );
     // TODO: router에서 넘어온 페이징처리 위한 값 확인

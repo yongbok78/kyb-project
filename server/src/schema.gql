@@ -42,7 +42,10 @@ input PostCreateInput {
 input PostUpdateInput {
   """내용"""
   content: String
-  id: Int!
+
+  """삭제 여부"""
+  delete: Boolean!
+  id: Int
 
   """발행여부"""
   published: Boolean
@@ -80,7 +83,7 @@ input UserCreateInput {
   name: String
 
   """배포자"""
-  posts: [PostCreateInput]
+  posts: [PostUpdateInput]!
 }
 
 input UserUpdateInput {
@@ -92,7 +95,7 @@ input UserUpdateInput {
   name: String
 
   """배포자"""
-  posts: [PostCreateInput!]
+  posts: [PostUpdateInput!]
 }
 
 input UserWhereInput {

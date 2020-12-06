@@ -40,10 +40,7 @@ export class UserResolver {
 
   @Mutation(() => User)
   updateUser(@Args('UserUpdateInput') data: UserUpdateInput) {
-    return this.userService.update({
-      where: { id: data.id },
-      data: data as Prisma.UserUpdateInput,
-    });
+    return this.userService.update(data);
   }
 
   @Mutation(() => User)

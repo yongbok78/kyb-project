@@ -44,5 +44,5 @@ function getTransition(p: string) {
 
 export const slideInAnimation = trigger(
   'routeAnimations',
-  pages.map((p) => getTransition(p))
+  pages.map(getTransition)
 );

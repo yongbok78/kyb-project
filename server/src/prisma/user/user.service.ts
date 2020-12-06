@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { PostCreateInput } from '../post/dto/post-create.input';
+import { PostUpdateInput } from '../post/dto/post-update.input';
 import { PrismaService } from '../prisma.service';
 import { UserCreateInput } from './dto/user-create.input';
+import { UserUpdateInput } from './dto/user-update.input';
 
 const include = { posts: true };
 @Injectable()
@@ -29,18 +32,52 @@ export class UserService {
       data: {
         name,
         email,
-        posts: { create: posts },
+        posts: {
+          create: posts.map((p) => {
+            const { title, content, published } = p;
+            return { title, content, published };
+          }),
+        },
       },
       include,
     });
   }
 
-  update(args: {
-    where: Prisma.UserWhereUniqueInput;
-    data: Prisma.UserUpdateInput;
-  }) {
-    const { where, data } = args;
-    return this.prisma.user.update({ data, where, include });
+  update(input: UserUpdateInput) {
+    const { id, name, email, posts } = input;
+    let createPosts: Prisma.PostCreateWithoutAuthorInput[] = [];
+    let updatePosts: Prisma.PostUpdateWithWhereUniqueWithoutAuthorInput[] = [];
+    let deletePosts: Prisma.PostWhereUniqueInput[] = [];
+
+    posts.forEach((p) => {
+      const { id, title, content, published } = p;
+      let where = { id },
+        data = { title, content, published };
+      if (p.delete) {
+        deletePosts.push(where);
+      } else if (p.id) {
+        updatePosts.push({ where, data });
+      } else {
+        createPosts.push(data);
+      }
+    });
+    if (createPosts.length === 0) createPosts = undefined;
+    if (updatePosts.length === 0) updatePosts = undefined;
+    if (deletePosts.length === 0) deletePosts = undefined;
+
+    return this.prisma.user.update({
+      where: { id },
+      data: {
+        name,
+        email,
+        posts: {
+          create: createPosts,
+          update: updatePosts,
+          delete: deletePosts,
+        },
+      },
+      include,
+    });
   }
 
   delete(where: Prisma.UserWhereUniqueInput) {

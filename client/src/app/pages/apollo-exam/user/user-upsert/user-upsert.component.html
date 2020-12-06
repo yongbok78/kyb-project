@@ -14,14 +14,24 @@
           <input matInput placeholder="abc@abc.com" formControlName="email" />
           <mat-error>이메일을 정확히 입력하세요.</mat-error>
         </mat-form-field>
-        <button mat-raised-button color="accent" (click)="addPost()">
-          게시물 추가
+        <button mat-mini-fab color="accent" (click)="addPost()">
+          <mat-icon aria-label="게시물 추가">add</mat-icon>
         </button>
       </div>
-      <div *ngIf="posts.length > 0" fxLayout="column" fxFlexAlign="start start" fxLayoutGap="10px">
+      <div
+        *ngIf="posts.length > 0"
+        fxLayout="column"
+        fxFlexAlign="start start"
+        fxLayoutGap="10px"
+      >
         <h1>게시물</h1>
-        <div *ngFor="let post of posts.controls; let i = index" [formGroup]="getPost(i)" fxLayout="row"
-          fxFlexAlign="start start" fxLayoutGap="10px">
+        <div
+          *ngFor="let post of posts.controls; let i = index"
+          [formGroup]="getPost(i)"
+          fxLayout="row"
+          fxFlexAlign="start start"
+          fxLayoutGap="10px"
+        >
           <mat-form-field appearance="legacy">
             <mat-label>제목</mat-label>
             <input matInput placeholder="제목" formControlName="title" />
@@ -31,7 +41,15 @@
             <mat-label>내용</mat-label>
             <input matInput placeholder="내용" formControlName="content" />
           </mat-form-field>
-          <mat-checkbox color="primary" formControlName="published">발행여부</mat-checkbox>
+          <mat-checkbox color="primary" formControlName="published"
+            >발행여부</mat-checkbox
+          >
+          <mat-checkbox
+            *ngIf="getPost(i).value.delete"
+            color="warn"
+            formControlName="delete"
+            >삭제</mat-checkbox
+          >
           <button mat-mini-fab color="warn" (click)="deletePost(i)">
             <mat-icon>remove</mat-icon>
           </button>
@@ -40,7 +58,32 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" (click)="goList()">목록</button>
-      <button mat-raised-button color="primary" (click)="save()" [disabled]="user.invalid">저장</button>
+      <button
+        *ngIf="user.value.id"
+        mat-raised-button
+        color="accent"
+        (click)="update()"
+        [disabled]="user.pristine || user.invalid"
+      >
+        수정
+      </button>
+      <button
+        *ngIf="user.value.id"
+        mat-raised-button
+        color="primary"
+        (click)="goDetail(user.value.id)"
+      >
+        취소
+      </button>
+      <button
+        *ngIf="!user.value.id"
+        mat-raised-button
+        color="accent"
+        (click)="add()"
+        [disabled]="user.invalid"
+      >
+        저장
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>

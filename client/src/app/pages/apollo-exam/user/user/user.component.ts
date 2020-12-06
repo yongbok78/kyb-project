@@ -11,7 +11,7 @@ export class UserComponent implements OnInit {
   user: User = {
     name: '',
     email: '',
-    posts: [{ title: '', content: '', published: false }],
+    posts: [{ title: '', content: '', published: false, delete: false }],
   };
   constructor(
     private route: ActivatedRoute,
@@ -21,7 +21,10 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userGQL
-      .fetch({ id: parseInt(this.route.snapshot.paramMap.get('id') || '0') })
+      .fetch(
+        { id: parseInt(this.route.snapshot.paramMap.get('id') || '0') },
+        { fetchPolicy: 'no-cache' }
+      )
       .subscribe((result) => (this.user = result.data.user || this.user));
   }
 
@@ -30,6 +33,8 @@ export class UserComponent implements OnInit {
   }
 
   goSave() {
-    alert('save');
+    this.router.navigate(['../save', { id: this.user.id }], {
+      relativeTo: this.route,
+    });
   }
 }
