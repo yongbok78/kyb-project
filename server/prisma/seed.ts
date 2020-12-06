@@ -1,10 +1,9 @@
 import { PrismaClient } from '@prisma/client';
-
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.post.deleteMany({});
-  await prisma.user.deleteMany({});
+  // await prisma.post.deleteMany({});
+  // await prisma.user.deleteMany({});
   for (let i = 1; i <= 100; i++) {
     await prisma.user.create({ data: createUser(i) });
   }
