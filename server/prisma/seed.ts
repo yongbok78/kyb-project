@@ -29,7 +29,7 @@ function createPosts(pad: string) {
     posts.push({
       title: `제목${pad}-${pad2}`,
       content: `내용${pad}-${pad2}`,
-      published: k % 2 === 0,
+      published: parseInt('' + Math.random() * 2) === 0,
     });
   }
   return posts;
