@@ -18,6 +18,14 @@ import { UserService } from './user.service';
 
 @Resolver(() => User)
 export class UserResolver {
+  qry?: {
+    skip?: number;
+    take?: number;
+    cursor?: Prisma.UserWhereUniqueInput;
+    where?: Prisma.UserWhereInput;
+    include?: Prisma.UserInclude;
+    orderBy?: Prisma.UserOrderByInput;
+  };
   constructor(private readonly userService: UserService) {}
 
   @Mutation(() => User)
@@ -28,9 +36,11 @@ export class UserResolver {
   @Query(() => [User])
   users(
     @ChidrenIncludes(['posts']) include,
-    @Args('UserWhereInput', { nullable: true }) where?: UserWhereInput
+    @Args('where', { nullable: true, description: '조회조건' })
+    where?: UserWhereInput
   ) {
-    return this.userService.findMany({ where, include });
+    this.qry = { where, include };
+    return this.userService.findMany(this.qry);
   }
 
   @Query(() => User)

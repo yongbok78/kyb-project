@@ -17,7 +17,7 @@ export const ChidrenIncludes = createParamDecorator(
       for (let s of data) {
         if (chidren.includes(s)) includes[s] = true;
       }
-      return includes;
+      return Object.keys(includes).length > 0 ? includes : undefined;
     } else {
       return undefined;
     }

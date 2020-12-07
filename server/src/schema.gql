@@ -58,7 +58,10 @@ type Query {
   post(id: Int!): Post!
   posts(PostWhereInput: PostCreateInput!): [Post!]!
   user(id: Int!): User!
-  users(UserWhereInput: UserWhereInput): [User!]!
+  users(
+    """조회조건"""
+    where: UserWhereInput
+  ): [User!]!
 }
 
 type User {
